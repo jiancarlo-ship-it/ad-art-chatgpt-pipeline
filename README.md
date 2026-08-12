@@ -128,20 +128,35 @@ Passos manuais no ChatGPT:
 
 1. Espere terminar (pode levar 1-3 min; o "Pensando" às vezes já inclui
    uma auto-correção espontânea antes da primeira entrega).
-2. **Baixe a imagem em resolução total** (botão de download no editor, não
-   confie no preview reduzido do chat) — erros de ortografia pequenos só
-   aparecem nítidos em resolução real.
+2. **Baixe a imagem em resolução total.** O ícone de compartilhar na
+   própria imagem abre um modal com vários botões próximos (Copiar link,
+   X, LinkedIn, Reddit, Baixar) — clique com cuidado especificamente em
+   **"Baixar"**; um clique goma no botão errado abre uma aba de
+   login/compartilhamento de outro site. Não confie no preview reduzido
+   do chat — erros de ortografia pequenos só aparecem nítidos em
+   resolução real.
 3. Salve o arquivo em `artes-geradas/`, com um nome que identifique a
    versão (ex. `chatgpt-feed-v1.png`).
 4. Se precisar de ajuste pontual (texto duplicado, elemento grande
    demais), volte na mesma conversa e descreva só a mudança pontual — o
    histórico mantém a composição e o ChatGPT edita só o que foi pedido.
 
-### 5. Calibre a cor da marca (só na primeira peça de uma marca nova)
+### 5. Calibre a cor da marca (só na primeira peça de uma marca nova, e só se fizer sentido)
 
-Abra a imagem baixada, amostre um pixel na área que deveria ser a cor da
-marca (ex. um pixel do fundo). Converta esse RGB e o hex oficial pra HSV
-(`colorsys.rgb_to_hsv`) e calcule:
+**Isso só se aplica a composições de fundo "chapado"/gráfico** (ex. peças
+estilo UI mockup, cards sobre gradiente sólido — validado com a Goalfy).
+**Pule esta etapa se a peça é uma cena fotográfica realista** (ambiente,
+objeto, luz natural) — nesse caso o "fundo" tem sombra e variação de luz
+natural da cena, não é uma cor chapada; aplicar correção HSV global nessa
+situação distorce a iluminação em vez de corrigir a marca (testado:
+tentar empurrar uma parede com sombra pra bater com o hex oficial estourou
+o brilho da imagem inteira). Para cena fotográfica, garanta a cor da marca
+só pelo hex exato já embutido no prompt (passo 4) e vá direto pro passo 6
+sem `--hue-alvo`.
+
+Se a peça é de fundo chapado: abra a imagem baixada, amostre um pixel na
+área que deveria ser a cor da marca (ex. um pixel do fundo). Converta esse
+RGB e o hex oficial pra HSV (`colorsys.rgb_to_hsv`) e calcule:
 
 - `hue_alvo`: diferença de matiz em graus entre o pixel gerado e o hex oficial;
 - `hue_faixa`: faixa de matiz (graus) que cobre a cor a corrigir (ex. `[245, 285]` pra tons de roxo);
