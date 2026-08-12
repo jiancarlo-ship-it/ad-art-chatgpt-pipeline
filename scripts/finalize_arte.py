@@ -174,7 +174,16 @@ def main():
             chave_logo = "versao_clara_png" if args.logo_versao == "clara" else "versao_escura_png"
             logo_cfg = marca.get("logo", {}).get(chave_logo)
             if logo_cfg:
+                # caminhos de logo na marca-config são relativos à PASTA DA CONFIG, não à raiz do repo/projeto
                 logo_path = os.path.normpath(os.path.join(os.path.dirname(args.marca_config), logo_cfg))
+                if not os.path.isfile(logo_path):
+                    raise SystemExit(
+                        f"Logo não encontrado em: {logo_path}\n"
+                        f"O campo '{chave_logo}' em {args.marca_config} é relativo à pasta dessa "
+                        "config, não à raiz do repositório nem à pasta do projeto. Ajuste o caminho "
+                        "no JSON (ver comentário em config/identidade-marca.exemplo.json) ou passe "
+                        "--logo <caminho> diretamente para sobrepor."
+                    )
 
     hue_faixa = hue_faixa or (245, 285)
     sat_add = sat_add if sat_add is not None else 0.0

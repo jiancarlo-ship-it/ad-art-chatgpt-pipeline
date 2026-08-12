@@ -15,8 +15,9 @@
   },
 
   "logo": {
-    "versao_clara_png": "caminho/para/logo-versao-clara.png",
-    "versao_escura_png": "caminho/para/logo-versao-escura.png",
+    "_comentario": "Caminhos SEMPRE relativos à pasta onde este arquivo de config está salvo (não à raiz do repositório, não à pasta do projeto). Ex.: se este arquivo é config/minha-marca.json e o logo está em assets/logo/x.png na raiz do repo, o caminho aqui é '../assets/logo/x.png'.",
+    "versao_clara_png": "../caminho/para/logo-versao-clara.png",
+    "versao_escura_png": "../caminho/para/logo-versao-escura.png",
     "regra_de_escolha": "fundo escuro -> use a versão clara; fundo claro -> use a versão escura"
   },
 

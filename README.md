@@ -66,6 +66,13 @@ visual da marca. Deixe `correcao_cor_calibrada.hue_alvo` como `null` por
 enquanto — isso é calibrado depois de ver a primeira imagem gerada (passo
 5 abaixo).
 
+**Importante:** os caminhos de `logo.versao_clara_png` /
+`versao_escura_png` são relativos à **pasta onde o arquivo de config está
+salvo** (`config/`), não à raiz do repositório nem à pasta do projeto. Ex.:
+se o logo está em `assets/logo/marca.png` na raiz do repo, o caminho no
+JSON é `../assets/logo/marca.png`. Se o caminho estiver errado,
+`finalize_arte.py` avisa exatamente qual arquivo procurou e onde.
+
 Nunca invente hex/fonte se a marca ainda não tiver isso definido
 oficialmente — deixe o campo como está e trate como pendência.
 
