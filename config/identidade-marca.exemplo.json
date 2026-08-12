@@ -1,0 +1,39 @@
+{
+  "_comentario": "Copie este arquivo para config/<sua-marca>.json e preencha com a identidade visual real da sua marca. Nenhum campo daqui é usado pelo sistema até você criar essa cópia preenchida — o .exemplo.json nunca é lido pelos scripts.",
+
+  "nome_marca": "Nome da Marca",
+
+  "paleta": {
+    "cor_principal": {
+      "hex": "#000000",
+      "uso": "cor de destaque/fundo principal da identidade visual"
+    },
+    "cor_secundaria": {
+      "hex": "#000000",
+      "uso": "cor de apoio (ex. texto, ícones, detalhes)"
+    }
+  },
+
+  "logo": {
+    "versao_clara_png": "caminho/para/logo-versao-clara.png",
+    "versao_escura_png": "caminho/para/logo-versao-escura.png",
+    "regra_de_escolha": "fundo escuro -> use a versão clara; fundo claro -> use a versão escura"
+  },
+
+  "tipografia": {
+    "fonte_headline": "Nome da fonte oficial usada em headline/CTA (nunca uma aproximação genérica)",
+    "fonte_corpo": "Nome da fonte oficial usada em texto de apoio/subheadline",
+    "peso_maximo_disponivel": 700,
+    "pasta_arquivos_fonte": "caminho/para/pasta/com/os/.ttf/.woff2"
+  },
+
+  "personalidade_visual": "Descreva em 2-4 frases o que a marca prioriza e o que evita visualmente. Ex.: 'sempre interface real do produto ou dado numérico em destaque, nunca banco de imagens genérico ou pessoas sorrindo forçado; tom direto, sem gradiente colorido excessivo nem emoji.'",
+
+  "correcao_cor_calibrada": {
+    "_comentario": "Preencha isso DEPOIS de gerar a primeira imagem de teste no ChatGPT, comparando um pixel da cor gerada com o hex oficial acima (ver README, seção 'Como calibrar os parâmetros de cor'). Até calibrar, deixe hue_alvo como null — o finalize_arte.py pula a correção de cor se não houver valor aqui nem em --hue-alvo.",
+    "hue_alvo": null,
+    "hue_faixa": [0, 360],
+    "sat_add": 0.0,
+    "val_mult": 1.0
+  }
+}

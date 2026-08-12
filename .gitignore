@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+
+# Configs de marca reais e projetos de criativo são dados do usuário —
+# nunca pertencem a este repositório de sistema. Só o .exemplo.json fica.
+config/*.json
+!config/identidade-marca.exemplo.json
+projetos/
+
+# Imagens reais de marca/cliente também ficam de fora, exceto exemplos
+# ilustrativos explicitamente adicionados em exemplos/.
+*.png
+*.jpg
+*.jpeg
+!exemplos/**/*.png
+!exemplos/**/*.jpg
