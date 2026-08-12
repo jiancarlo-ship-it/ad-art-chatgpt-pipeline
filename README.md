@@ -13,6 +13,11 @@ gerar qualquer arte, cada usuário cria a própria config de marca e a
 própria pasta de referências (ver "Setup" abaixo) — nada aqui é específico
 de nenhuma marca ou cliente.
 
+> **Usando Claude Code?** Abra este repositório com o Claude Code e peça
+> pra gerar uma arte — o arquivo `CLAUDE.md` faz o Claude conduzir todo o
+> setup (identidade de marca, pasta de referências, logo, novo projeto)
+> através de perguntas, sem precisar ler o resto deste README manualmente.
+
 ## Por que este pipeline existe
 
 Testamos três abordagens diferentes pra gerar arte de anúncio:
@@ -37,6 +42,7 @@ qualquer forma (cor de marca exata + logo real).
 ## Estrutura do repositório
 
 ```
+CLAUDE.md                          <- instruções de onboarding para o Claude Code (ver caixa acima)
 config/
   identidade-marca.exemplo.json   <- modelo; copie e preencha, nunca edite o .exemplo
 scripts/
@@ -45,6 +51,7 @@ scripts/
   finalize_arte.py                 <- acabamento: cor de marca + logo real + resize
 exemplos/
   crm-vendedor-brasileiro-v2/      <- exemplo real de uso (comandos, não arquivos de marca)
+  promo-outono-cafe/               <- teste ponta a ponta com marca fictícia + achados
 ```
 
 `config/` e as pastas de projeto (`referencias/`, `artes-geradas/`,
