@@ -4,9 +4,11 @@ Pipeline que produziu o **melhor resultado até agora** entre as vias de
 geração de arte testadas para criativos de anúncio (validado 2026-08-11,
 peça "CRM para o vendedor brasileiro" — duas peças completas, zero erro de
 texto). A ideia central: **deixar a IA generativa fazer só o que ela faz
-bem (cena, composição, texto renderizado)** e **nunca confiar nela** para
-os dois elementos que precisam estar 100% corretos — a cor exata da marca
-e o logo oficial — que entram depois por código, determinístico.
+bem (cena, composição, texto renderizado, e — quando anexada como
+referência — reproduzir fielmente uma tela de produto real)** e **nunca
+confiar nela** para os dois elementos que precisam estar 100% corretos — a
+cor exata da marca e o logo oficial — que entram depois por código,
+determinístico.
 
 Este é um **sistema genérico**, sem identidade de marca embutida. Antes de
 gerar qualquer arte, cada usuário cria a própria config de marca e a
@@ -147,6 +149,46 @@ Passos manuais no ChatGPT:
 4. Se precisar de ajuste pontual (texto duplicado, elemento grande
    demais), volte na mesma conversa e descreva só a mudança pontual — o
    histórico mantém a composição e o ChatGPT edita só o que foi pedido.
+
+### Regra fixa: tela de produto real entra na geração/edição do ChatGPT, nunca depois por código
+
+Se a peça precisa mostrar uma tela de software (painel, CRM, app, inbox,
+dashboard, qualquer print de interface real), essa tela **sempre** entra
+como imagem de referência anexada no mesmo prompt/turno do ChatGPT junto
+com o pedido de geração (passo 4) — nunca é recortada/warpada/colada por
+cima depois via Pillow/OpenCV (`cv2.getPerspectiveTransform`, `warpPerspective`,
+`Image.paste`, etc.), mesmo que a matemática saia tecnicamente perfeita
+(cantos medidos a pixel, sem vazamento). Isso vale tanto pra gerar uma peça
+nova quanto pra **editar/ajustar uma peça já existente e aprovada** — não é
+uma regra só do "primeiro rascunho".
+
+Motivo (validado repetidas vezes, incluindo em 2026-08-24 numa edição de
+peça já pronta): compositar um print real por cima de uma cena/mockup já
+gerado sempre deixa algum resíduo de colagem visível (halo sutil, blur nas
+bordas do warp, textura da tela levemente descasada da luz/perspectiva da
+foto) — mesmo quando a medição de coordenadas está tecnicamente correta.
+Anexar a peça já existente **e** o(s) print(s) real(is) como imagens de
+referência no mesmo prompt, pedindo pra regenerar a cena mantendo tudo
+igual exceto a tela (que deve reproduzir fielmente a referência anexada),
+dá um resultado sem nenhum artefato de composição — a IA redesenha a tela
+já integrada à luz/perspectiva da cena, em vez de colar um recorte por
+cima. Efeito colateral bom observado: pedir a tela real nesse mesmo passo
+também é a deixa natural pra corrigir de graça qualquer proporção errada
+que a IA tenha desenhado (ex. tela de notebook quase quadrada em vez de
+16:10 — ver `exemplos/`), já que é tudo redesenhado junto.
+
+Pillow/OpenCV neste pipeline (passo 6, `finalize_arte.py`) continuam sendo
+a ferramenta certa **só** para o que realmente precisa ser determinístico e
+não é a tela em si: cor exata da marca e logo oficial pixel-perfeito. Se a
+tela de produto saiu errada ou precisa trocar, a correção é sempre voltar
+pro ChatGPT (mesma conversa, pedido pontual) — nunca tentar consertar via
+script depois.
+
+Antes de anexar o print real, sempre confirme que ele já passou pela
+anonimização de dados sensíveis (nomes, telefones, fotos de cliente real —
+ver checklist do passo 7); a IA generativa reproduz fielmente o que for
+anexado, então dado sensível na referência pode acabar redesenhado (ainda
+que estilizado) na peça final.
 
 ### 5. Calibre a cor da marca (só na primeira peça de uma marca nova, e só se fizer sentido)
 

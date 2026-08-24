@@ -103,6 +103,15 @@ Depois de baixada, pergunte onde o usuário salvou o arquivo (ou onde você
 baixou, se foi via automação) e copie/mova para
 `projetos/<nome>/artes-geradas/`.
 
+**Regra fixa, sem exceção: se a peça precisa mostrar uma tela de produto
+real (painel, CRM, app, dashboard), essa tela entra como imagem anexada
+neste mesmo passo do ChatGPT, nunca é composta depois via Pillow/OpenCV.**
+Vale também quando o pedido é só "ajustar uma arte já pronta" — nesse caso,
+anexe a peça já existente **e** o(s) print(s) real(is) juntos e peça pra
+regenerar mantendo tudo igual exceto a tela. Ver detalhe completo e o caso
+real que validou isso no README ("Regra fixa: tela de produto real..."),
+seção entre os passos 4 e 5.
+
 ## Passo 4 — Acabamento
 
 Antes de rodar `finalize_arte.py`, pergunte/confirme:
@@ -124,6 +133,10 @@ checagem ao usuário como etapa de encerramento.
 
 ## Regras gerais
 
+- **Tela de produto real (painel, CRM, app, dashboard) sempre entra como
+  imagem de referência no mesmo passo de geração/edição do ChatGPT —
+  nunca compositada depois por script.** Isso vale para peça nova e para
+  ajuste de peça já existente/aprovada. Ver Passo 3 e o README.
 - Nunca invente hex, fonte ou texto de identidade visual — pergunte ou
   registre como pendência.
 - Nunca commite `config/*.json` reais (só o `.exemplo.json`) nem imagens
